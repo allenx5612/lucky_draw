@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'window.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.0
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -91,6 +91,11 @@ class Ui_Form(object):
         self.tableWidget.verticalHeader().setHighlightSections(False)
         self.gridLayout.addWidget(self.tableWidget, 0, 1, 1, 2)
         self.listWidget = QtWidgets.QListWidget(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
+        self.listWidget.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
@@ -101,8 +106,11 @@ class Ui_Form(object):
 "border: black")
         self.listWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.listWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.listWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.listWidget.setAutoScroll(False)
         self.listWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.listWidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.listWidget.setBatchSize(34)
         self.listWidget.setItemAlignment(QtCore.Qt.AlignTop)
         self.listWidget.setObjectName("listWidget")
         self.gridLayout.addWidget(self.listWidget, 0, 0, 2, 1)

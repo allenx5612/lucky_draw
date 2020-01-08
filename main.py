@@ -7,6 +7,11 @@ author: allenx
 """
 
 import sys
+import os
+# fix pyinstaller unable to find Qt5Core.dll on PATH issue
+if hasattr(sys, 'frozen'):
+    os.environ['PATH'] = sys._MEIPASS + ";" + os.environ['PATH']
+
 import time
 from PyQt5.QtWidgets import QApplication, QWidget, QDesktopWidget, QTableWidgetItem, QListWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
@@ -62,11 +67,11 @@ class MainWindow(QWidget, Ui_Form):
 
             item = QListWidgetItem(NAME_LIST[i])
             item.setTextAlignment(Qt.AlignCenter)
-            item.setFont(QFont('Fixed', 18))
+            item.setFont(QFont('Segoe UI', 18, 75))
             self.listWidget.addItem(item)
 
-        select_item = self.listWidget.item(15)
-        select_item.setFont(QFont('Fixed', 35))
+        select_item = self.listWidget.item(13)
+        select_item.setFont(QFont('Segoe UI', 35, 75))
         select_item.setSelected(True)
 
     def list_add(self, file_inf):
@@ -76,10 +81,10 @@ class MainWindow(QWidget, Ui_Form):
         self.listWidget.insertItem(0, item)
         self.listWidget.scrollToTop()
 
-        select_item = self.listWidget.item(15)
+        select_item = self.listWidget.item(13)
         select_item.setSelected(True)
-        select_item.setFont(QFont('Fixed', 35))
-        self.listWidget.item(16).setFont(QFont('Fixed', 18))
+        select_item.setFont(QFont('Segoe UI', 35, 75))
+        self.listWidget.item(14).setFont(QFont('Segoe UI', 18, 75))
 
     def wheel_run(self):
 
