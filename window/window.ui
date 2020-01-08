@@ -17,7 +17,14 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Who's the Luky Kid</string>
+   <string>中奖了，中奖了，金星买来送你呀</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: black;
+color: white</string>
+  </property>
+  <property name="locale">
+   <locale language="Chinese" country="China"/>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="7,1" columnstretch="8,1,1">
    <item row="1" column="2">
@@ -28,8 +35,20 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 222);
+color: rgb(255, 85, 0);
+border: black</string>
+     </property>
      <property name="text">
-      <string>Reset</string>
+      <string>清理</string>
      </property>
      <property name="iconSize">
       <size>
@@ -47,8 +66,20 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(46, 179, 152);
+color: white;
+border: black</string>
+     </property>
      <property name="text">
-      <string>Start</string>
+      <string>开始</string>
      </property>
     </widget>
    </item>
@@ -64,11 +95,22 @@
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(157, 157, 157);
+color: white;
+border: black</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="tabKeyNavigation">
+      <bool>false</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::NoSelection</enum>
      </property>
      <property name="textElideMode">
       <enum>Qt::ElideRight</enum>
@@ -80,7 +122,7 @@
       <bool>true</bool>
      </property>
      <property name="rowCount">
-      <number>10</number>
+      <number>20</number>
      </property>
      <property name="columnCount">
       <number>2</number>
@@ -91,12 +133,28 @@
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>true</bool>
      </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>90</number>
+     </attribute>
      <attribute name="horizontalHeaderHighlightSections">
       <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
      <row/>
      <row/>
      <row/>
@@ -134,8 +192,10 @@
        <bold>true</bold>
       </font>
      </property>
-     <property name="focusPolicy">
-      <enum>Qt::StrongFocus</enum>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(157, 157, 157);
+color: white;
+border: black</string>
      </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -146,17 +206,11 @@
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <property name="movement">
-      <enum>QListView::Free</enum>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <property name="itemAlignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="currentRow">
-      <number>-1</number>
+      <set>Qt::AlignTop</set>
      </property>
     </widget>
    </item>
