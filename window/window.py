@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'window.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -78,7 +78,7 @@ class Ui_Form(object):
         font.setBold(True)
         font.setWeight(75)
         self.listWidget.setFont(font)
-        self.listWidget.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
+        self.listWidget.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.listWidget.setStyleSheet("")
         self.listWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.listWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -97,6 +97,7 @@ class Ui_Form(object):
         font.setBold(True)
         font.setWeight(75)
         self.tableWidget.setFont(font)
+        self.tableWidget.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.tableWidget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.tableWidget.setStyleSheet("")
         self.tableWidget.setFrameShape(QtWidgets.QFrame.StyledPanel)
