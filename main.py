@@ -149,6 +149,7 @@ class MainWindow(QWidget, Ui_Form):
                     count = math.ceil(count / 2)
                     self.tableWidget.setRowCount(self.tableWidget.rowCount() + count)
                     item = QTableWidgetItem(prize)
+                    item.setTextAlignment(Qt.AlignLeft)
                     self.tableWidget.setItem(row, 0, item)
                     self.tableWidget.resizeColumnsToContents()
                 else:
@@ -183,7 +184,6 @@ class MainWindow(QWidget, Ui_Form):
 
             if self.prize:
 
-                print(self.row, self.col)
                 next_item = self.tableWidget.item(self.row + 1, 0)
 
                 if next_item:
@@ -192,16 +192,14 @@ class MainWindow(QWidget, Ui_Form):
                         self.row += 1
                         self.col -= 1
 
-                print(self.row, self.col)
                 cur_item = self.tableWidget.item(self.row, self.col)
                 if cur_item:
                     self.prize_text = cur_item.text()
                     if cur_item.text() in self.prize:
                         self.row += 1
-                        print(cur_item.text())
 
             item = QTableWidgetItem(text)
-            item.setTextAlignment(Qt.AlignCenter)
+            item.setTextAlignment(Qt.AlignLeft)
             self.tableWidget.setItem(self.row, self.col, item)
             self.tableWidget.resizeColumnsToContents()
 
