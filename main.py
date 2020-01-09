@@ -281,7 +281,7 @@ if __name__ == "__main__":
     QSS = '''
             QWidget {
                 background-color: black;
-                color: orange
+                color: #ffffbf 
             }
             QListWidget {
                 background-color: rgb(157, 157, 157);
@@ -293,16 +293,16 @@ if __name__ == "__main__":
                 color: white
             }
             QPushButton {
-                background-color: orange;
-                color: black 
+                background-color: #ffffbf;
+                color: #ff5500
             }
             QPushButton#StartButton, #groupButton {
                 background-color: rgb(46, 179, 152);
                 color: white
             }
             QPushButton#ResetButton, #drawButton {
-                background-color: orange;
-                color: black 
+                background-color: #ffffbf;
+                color: #ff5500 
             }
             
     '''

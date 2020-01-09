@@ -36,6 +36,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Microsoft YaHei UI</family>
        <pointsize>20</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -62,6 +63,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Microsoft YaHei UI</family>
        <pointsize>20</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -88,7 +90,7 @@
     <widget class="QPushButton" name="groupButton">
      <property name="font">
       <font>
-       <family>Cantarell Extra Bold</family>
+       <family>Microsoft YaHei UI</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -114,6 +116,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Microsoft YaHei UI</family>
        <pointsize>18</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -155,6 +158,7 @@
     <widget class="QTableWidget" name="tableWidget">
      <property name="font">
       <font>
+       <family>Microsoft YaHei UI</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -253,6 +257,7 @@
     <widget class="QPushButton" name="drawButton">
      <property name="font">
       <font>
+       <family>Microsoft YaHei UI</family>
        <weight>75</weight>
        <bold>true</bold>
       </font>

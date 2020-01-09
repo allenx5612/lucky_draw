@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'window.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.0
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -30,6 +30,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.StartButton.sizePolicy().hasHeightForWidth())
         self.StartButton.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI")
         font.setPointSize(20)
         font.setBold(True)
         font.setWeight(75)
@@ -45,6 +46,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.ResetButton.sizePolicy().hasHeightForWidth())
         self.ResetButton.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI")
         font.setPointSize(20)
         font.setBold(True)
         font.setWeight(75)
@@ -56,7 +58,7 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.ResetButton, 2, 2, 1, 1)
         self.groupButton = QtWidgets.QPushButton(Form)
         font = QtGui.QFont()
-        font.setFamily("Cantarell Extra Bold")
+        font.setFamily("Microsoft YaHei UI")
         font.setBold(True)
         font.setWeight(75)
         self.groupButton.setFont(font)
@@ -71,6 +73,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.listWidget.sizePolicy().hasHeightForWidth())
         self.listWidget.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI")
         font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
@@ -89,6 +92,7 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.listWidget, 0, 0, 3, 1)
         self.tableWidget = QtWidgets.QTableWidget(Form)
         font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI")
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
@@ -120,6 +124,7 @@ class Ui_Form(object):
         self.gridLayout.addWidget(self.tableWidget, 0, 1, 1, 2)
         self.drawButton = QtWidgets.QPushButton(Form)
         font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei UI")
         font.setBold(True)
         font.setWeight(75)
         self.drawButton.setFont(font)
