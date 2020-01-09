@@ -13,7 +13,9 @@ if hasattr(sys, 'frozen'):
     os.environ['PATH'] = sys._MEIPASS + ";" + os.environ['PATH']
 
 import time
-from PyQt5.QtWidgets import QApplication, QWidget, QDesktopWidget, QTableWidgetItem, QListWidgetItem, QMessageBox
+import math
+from PyQt5.QtWidgets import QApplication, QWidget, QDesktopWidget, QTableWidgetItem, QListWidgetItem, QMessageBox, \
+    QInputDialog
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 from PyQt5.QtGui import QFont
 from window.window import Ui_Form
@@ -37,17 +39,30 @@ class MainWindow(QWidget, Ui_Form):
 
     row = 0
     col = 0
+    num = 0
+    font = ''
+    prize = {}
+    prize_text = ''
 
     def __init__(self):
         super().__init__()
+        if sys.platform == 'win32':
+            self.font = 'Microsoft YaHei UI'
+        elif sys.platform == 'linux':
+            self.font = 'Contarell'
+
         self.setupUi(self)
         self.center()
         self.init_item()
         self.thread = WheelThread()
         self.timer = QTimer()
+        self.tableWidget.setCurrentItem(None)
+        self.listWidget.scrollToTop()
 
         self.StartButton.clicked.connect(self.wheel_run)
-        self.ResetButton.clicked.connect(self.reset)
+        self.groupButton.clicked.connect(self.mode_select)
+        self.drawButton.clicked.connect(self.mode_select)
+        self.ResetButton.clicked.connect(self.reset_pop)
         self.thread.sin_out.connect(self.list_add)
         self.timer.timeout.connect(self.group_add)
 
@@ -67,11 +82,11 @@ class MainWindow(QWidget, Ui_Form):
 
             item = QListWidgetItem(NAME_LIST[i])
             item.setTextAlignment(Qt.AlignCenter)
-            item.setFont(QFont('Segoe UI', 18, 75))
+            item.setFont(QFont(self.font, 18, 75))
             self.listWidget.addItem(item)
 
         select_item = self.listWidget.item(13)
-        select_item.setFont(QFont('Segoe UI', 35, 75))
+        select_item.setFont(QFont(self.font, 35, 75))
         select_item.setSelected(True)
 
     def list_add(self, file_inf):
@@ -83,8 +98,8 @@ class MainWindow(QWidget, Ui_Form):
 
         select_item = self.listWidget.item(13)
         select_item.setSelected(True)
-        select_item.setFont(QFont('Segoe UI', 35, 75))
-        self.listWidget.item(14).setFont(QFont('Segoe UI', 18, 75))
+        select_item.setFont(QFont(self.font, 35, 75))
+        self.listWidget.item(14).setFont(QFont(self.font, 18, 75))
 
     def wheel_run(self):
 
@@ -104,6 +119,53 @@ class MainWindow(QWidget, Ui_Form):
             self.StartButton.setEnabled(False)
             self.timer.start(1000)
 
+    def mode_select(self):
+
+        num = 0
+        row = 0
+        sender = self.sender()
+        chinum = ['一', '二', '三', '四', '五', '六']
+        if sender.text() == "抽奖":
+            while True:
+                prize, ok = QInputDialog.getText(self,
+                                                 '奖项',
+                                                 '要给奖奖取个什么名字呢？ 点击取消退出哦！',
+                                                 text='神秘大奖' + chinum[num % len(chinum)]
+                                                 )
+                if not ok:
+                    break
+
+                count, ok = QInputDialog.getInt(self,
+                                                '名额',
+                                                '要给多少个人人呢? 点击取消重新设置奖项哦!',
+                                                10
+                                                )
+                if ok:
+                    if row == 0:
+                        self.reset()
+
+                    self.prize[prize] = count
+
+                    count = math.ceil(count / 2)
+                    self.tableWidget.setRowCount(self.tableWidget.rowCount() + count)
+                    item = QTableWidgetItem(prize)
+                    self.tableWidget.setItem(row, 0, item)
+                    self.tableWidget.resizeColumnsToContents()
+                else:
+                    continue
+                num += 1
+                row += count + 1
+
+        elif sender.text() == '分组':
+            count, ok = QInputDialog.getInt(self,
+                                            '组数',
+                                            '要分多少个组组呢?',
+                                            6
+                                            )
+            if ok:
+                self.reset()
+                self.tableWidget.setRowCount(self.tableWidget.rowCount() + count)
+
     def group_add(self):
 
         global RESULT
@@ -119,12 +181,31 @@ class MainWindow(QWidget, Ui_Form):
             NAME_LIST.remove(text)
             GROUP_LIST.append(text)
 
+            if self.prize:
+
+                print(self.row, self.col)
+                next_item = self.tableWidget.item(self.row + 1, 0)
+
+                if next_item:
+                    count = self.prize[self.prize_text]
+                    if count % 2 == 1 and self.col:
+                        self.row += 1
+                        self.col -= 1
+
+                print(self.row, self.col)
+                cur_item = self.tableWidget.item(self.row, self.col)
+                if cur_item:
+                    self.prize_text = cur_item.text()
+                    if cur_item.text() in self.prize:
+                        self.row += 1
+                        print(cur_item.text())
+
             item = QTableWidgetItem(text)
             item.setTextAlignment(Qt.AlignCenter)
             self.tableWidget.setItem(self.row, self.col, item)
             self.tableWidget.resizeColumnsToContents()
 
-            if self.col:
+            if not self.col:
                 self.col += 1
             else:
                 self.row += 1
@@ -134,13 +215,23 @@ class MainWindow(QWidget, Ui_Form):
 
     def reset(self):
 
-        if len(GROUP_LIST) == 0:
-            QMessageBox.about(self, "莫清了唉， 乖乖", "都没东西了你在清你伟大的母亲大人么？")
-        else:
-            NAME_LIST.extend(GROUP_LIST)
-            GROUP_LIST.clear()
-            self.tableWidget.clearContents()
-            self.row = self.col = 0
+        NAME_LIST.extend(GROUP_LIST)
+        GROUP_LIST.clear()
+        self.prize.clear()
+        self.tableWidget.clearContents()
+        self.tableWidget.setRowCount(20)
+        self.row = self.col = self.num = 0
+
+    def reset_pop(self):
+
+        reply = QMessageBox.information(self,
+                                        "你确定?",
+                                        "清理这么重大的事，你考虑好了么？",
+                                        QMessageBox.Yes | QMessageBox.No,
+                                        QMessageBox.No
+                                        )
+        if reply == QMessageBox.Yes:
+            self.reset()
 
     def closeEvent(self, event):
 
@@ -175,7 +266,7 @@ class WheelThread(QThread):
             self.sin_out.emit(list_str)
             if not THREAD_RUN:
                 SPEED *= 1.05
-                if SPEED > 0.6:
+                if SPEED > 0.4:
                     break
             time.sleep(SPEED)
             self.num += 1
@@ -187,5 +278,35 @@ class WheelThread(QThread):
 if __name__ == "__main__":
     APP = QApplication(sys.argv)
     FORM = MainWindow()
+    QSS = '''
+            QWidget {
+                background-color: black;
+                color: orange
+            }
+            QListWidget {
+                background-color: rgb(157, 157, 157);
+                color: white;
+                border: black
+            }
+            QTableWidget {
+                background-color: rgb(157, 157, 157);
+                color: white
+            }
+            QPushButton {
+                background-color: orange;
+                color: black 
+            }
+            QPushButton#StartButton, #groupButton {
+                background-color: rgb(46, 179, 152);
+                color: white
+            }
+            QPushButton#ResetButton, #drawButton {
+                background-color: orange;
+                color: black 
+            }
+            
+    '''
+    FORM.setStyleSheet(QSS)
+
     FORM.show()
     sys.exit(APP.exec_())
